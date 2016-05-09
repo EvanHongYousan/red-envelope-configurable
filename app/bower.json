@@ -1,0 +1,23 @@
+{
+  "name": "app",
+  "homepage": "https://github.com/EvanHongYousan/red-envelope-configurable",
+  "authors": [
+    "Evan Yan <1370204201@qq.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.5",
+    "angular-route": "^1.5.5",
+    "angular-animate": "^1.5.5"
+  }
+}

@@ -1,0 +1,35 @@
+.home {
+  .imgContainer {
+    img {
+      width: 100%;
+    }
+  }
+
+  .bottomContainer {
+    text-align: center;
+    .openBtn {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      line-height: 100px;
+      display: block;
+      margin: 0 auto;
+      text-align: center;
+      color: white;
+      background-color: #51d7b9;
+    }
+    input {
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #e2e2e2;
+      color: white;
+      text-align: center;
+      font-size: 22px;
+      margin: 20px 0;
+    }
+    input[placeholder] {
+      color:white;
+    }
+  }
+}

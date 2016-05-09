@@ -1,0 +1,26 @@
+{
+  "name": "red-envelope-configurable",
+  "version": "1.0.0",
+  "description": "",
+  "main": "red-envelope-configurable",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EvanHongYousan/red-envelope-configurable.git"
+  },
+  "author": "Evan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EvanHongYousan/red-envelope-configurable/issues"
+  },
+  "homepage": "https://github.com/EvanHongYousan/red-envelope-configurable#readme",
+  "dependencies": {
+    "express": "^4.13.4",
+    "gulp": "^3.9.1",
+    "gulp-angular-templatecache": "^1.8.0",
+    "gulp-sass": "^2.3.1",
+    "morgan": "^1.7.0"
+  }
+}

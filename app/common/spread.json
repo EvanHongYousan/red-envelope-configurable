@@ -1,0 +1,15 @@
+{
+  "banner":"../common/images/banner.png",
+  "cardBg":"../common/images/cardBg.png",
+  "openBtnText":"拆红包",
+  "openBtnBgColor":"#51d7b9",
+  "rules":{
+    "title":{
+      "text":"活动规则",
+      "color":"#aeaeae"
+    },
+    "detail":{
+      "text":["1.分享活动即可领取新年红包","2.新年红包每领必中"]
+    }
+  }
+}
