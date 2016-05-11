@@ -386,7 +386,8 @@ d){if(0===d)c.push(a);else{var f=a.match(/(\w+)(?:[?*])?(.*)/),g=f[1];c.push(b[g
 }};a.$on("$locationChangeStart",l);a.$on("$locationChangeSuccess",m);return s}]}),B=d.$$minErr("ngRoute");w.provider("$routeParams",function(){this.$get=function(){return{}}});w.directive("ngView",z);w.directive("ngView",A);z.$inject=["$route","$anchorScroll","$animate"];A.$inject=["$compile","$controller","$route"]})(window,window.angular);
 //# sourceMappingURL=angular-route.min.js.map
 
-angular.module("templatescache", []).run(["$templateCache", function($templateCache) {$templateCache.put("home.html","<div class=\"home\">\r\n    <div class=\"imgContainer\">\r\n        <img src=\"\" alt=\"\" ng-src=\"{{imgSrc}}\">\r\n    </div>\r\n    <div class=\"bottomContainer\">\r\n        <input type=\"text\" ng-model=\"phoneNumber\" placeholder=\"请输入你的手机号码\" />\r\n        <span class=\"openBtn\" ng-style=\"{\'background-image\': \'url(\'+openBtnBgImg+\')\',\'background-size\':\'100% 100%\'}\" ng-click=\"openRed\">{{openBtnText}}</span>\r\n        <h3>活动规则</h3>\r\n        <p class=\"rules-text\" ng-repeat=\"item in rulesText track by $index\">{{item}}</p>\r\n    </div>\r\n</div>");}]);
+angular.module("templatescache", []).run(["$templateCache", function($templateCache) {$templateCache.put("home.html","<div class=\"home\">\r\n    <div class=\"imgContainer\">\r\n        <img src=\"\" alt=\"\" ng-src=\"{{imgSrc}}\">\r\n    </div>\r\n    <div class=\"bottomContainer\">\r\n        <input type=\"text\" ng-model=\"phoneNumber\" placeholder=\"请输入你的手机号码\" />\r\n        <span class=\"openBtn\" ng-style=\"{\'background-image\': \'url(\'+openBtnBgImg+\')\',\'background-size\':\'100% 100%\'}\" ng-click=\"openRedPackage()\">{{openBtnText}}</span>\r\n        <h3>活动规则</h3>\r\n        <p class=\"rules-text\" ng-repeat=\"item in rulesText track by $index\">{{item}}</p>\r\n    </div>\r\n</div>");
+$templateCache.put("result.html","<div class=\"result\">\r\n    <div class=\"imgContainer\">\r\n        <img src=\"\" alt=\"\" ng-src=\"{{imgSrc}}\">\r\n    </div>\r\n    <div class=\"bottomContainer\">\r\n        <p class=\"slogan\">恭喜你，获得红包</p>\r\n        <span class=\"downloadBtn\" ng-style=\"{\'background-image\': \'url(\'+downloadBtnImg+\')\',\'background-size\':\'100% 100%\'}\">{{downloadBtnText}}</span>\r\n    </div>\r\n</div>");}]);
 /**
  * Created by yantianyu on 2014/12/12.
  */
@@ -471,6 +472,10 @@ app.config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'home.html',
             controller: 'homeController'
         })
+        .when('/result', {
+            templateUrl: 'result.html',
+            controller: 'resultController'
+        })
 
         .otherwise('/home');
 
@@ -478,7 +483,7 @@ app.config(['$routeProvider', function ($routeProvider) {
 app.service('configService', function () {
     this.data = [];
 });
-app.controller('homeController', ["$scope", "$http", function ($scope, $http) {
+app.controller('homeController', ['$scope', '$http', '$location', '$rootScope', function ($scope, $http, $location, $rootScope) {
     $http({
         method: 'GET',
         url: '../common/spread.json'
@@ -487,6 +492,22 @@ app.controller('homeController', ["$scope", "$http", function ($scope, $http) {
         $scope.openBtnText = resp.data.button_share_name_11;
         $scope.phoneNumber = '';
         $scope.openBtnBgImg = resp.data.button_share_pic_10;
+        $scope.rulesText = resp.data.share_rule_12;
+    });
+
+    $scope.openRedPackage = function () {
+        $location.path('result');
+    }
+}]);
+
+app.controller('resultController', ['$scope', '$http', '$rootScope', function ($scope, $http, $rootScope) {
+    $http({
+        method: 'GET',
+        url: '../common/spread.json'
+    }).then(function (resp) {
+        $scope.imgSrc = resp.data.front_pic_2;
+        $scope.downloadBtnText = resp.data.button_fetch_text_14;
+        $scope.downloadBtnImg = resp.data.button_fetch_pic_13;
         $scope.rulesText = resp.data.share_rule_12;
     });
 }]);

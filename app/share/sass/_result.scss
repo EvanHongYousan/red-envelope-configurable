@@ -1,0 +1,34 @@
+.result {
+  .imgContainer {
+    padding: 0;
+    margin: 0;
+    border: none;
+    width: 100%;
+    overflow: hidden;
+    img {
+      padding: 0;
+      margin: 0;
+      border: none;
+      width: 100%;
+    }
+  }
+
+  .bottomContainer {
+    text-align: center;
+    .slogan {
+      margin-top: 20px;
+      color: #959595;
+    }
+    .downloadBtn {
+      width: 80%;
+      padding: 10px;
+      display: block;
+      margin: 0 auto;
+      text-align: center;
+      color: white;
+      background-color: #ff8e42;
+      border-radius: 5px;
+      font-size: 22px;
+    }
+  }
+}

@@ -9,6 +9,10 @@ app.config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'home.html',
             controller: 'homeController'
         })
+        .when('/result', {
+            templateUrl: 'result.html',
+            controller: 'resultController'
+        })
 
         .otherwise('/home');
 
@@ -16,7 +20,7 @@ app.config(['$routeProvider', function ($routeProvider) {
 app.service('configService', function () {
     this.data = [];
 });
-app.controller('homeController', ["$scope", "$http", function ($scope, $http) {
+app.controller('homeController', ['$scope', '$http', '$location', '$rootScope', function ($scope, $http, $location, $rootScope) {
     $http({
         method: 'GET',
         url: '../common/spread.json'
@@ -26,6 +30,21 @@ app.controller('homeController', ["$scope", "$http", function ($scope, $http) {
         $scope.phoneNumber = '';
         $scope.openBtnBgImg = resp.data.button_share_pic_10;
         $scope.rulesText = resp.data.share_rule_12;
+    });
+
+    $scope.openRedPackage = function () {
+        $location.path('result');
+    }
+}]);
+
+app.controller('resultController', ['$scope', '$http', '$rootScope', function ($scope, $http, $rootScope) {
+    $http({
+        method: 'GET',
+        url: '../common/spread.json'
+    }).then(function (resp) {
+        $scope.imgSrc = resp.data.front_pic_2;
+        $scope.downloadBtnText = resp.data.button_fetch_text_14;
+        $scope.downloadBtnImg = resp.data.button_fetch_pic_13;
     });
 }]);
 

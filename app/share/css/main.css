@@ -71,3 +71,55 @@ body {
     text-align: left;
     color: #959595;
     padding: 0 7%; }
+
+.result .imgContainer {
+  padding: 0;
+  margin: 0;
+  border: none;
+  width: 100%;
+  overflow: hidden; }
+  .result .imgContainer img {
+    padding: 0;
+    margin: 0;
+    border: none;
+    width: 100%; }
+
+.result .bottomContainer {
+  text-align: center; }
+  .result .bottomContainer .slogan {
+    margin-top: 20px;
+    color: #959595; }
+  .result .bottomContainer .downloadBtn {
+    width: 80%;
+    padding: 10px;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    color: white;
+    background-color: #ff8e42;
+    border-radius: 5px;
+    font-size: 22px; }
+
+.slideup {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%; }
+
+.slideup.ng-enter,
+.slideup.ng-leave {
+  -webkit-transition: all 1s ease;
+  transition: all 1s ease; }
+
+.slideup.ng-enter {
+  top: 100%; }
+
+.slideup.ng-enter-active {
+  top: 0; }
+
+.slideup.ng-leave {
+  top: 0; }
+
+.slideup.ng-leave-active {
+  top: -100%; }
