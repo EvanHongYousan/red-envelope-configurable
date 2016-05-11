@@ -1,6 +1,14 @@
 .home {
   .imgContainer {
+    padding: 0;
+    margin: 0;
+    border: none;
+    width: 100%;
+    overflow: hidden;
     img {
+      padding: 0;
+      margin: 0;
+      border: none;
       width: 100%;
     }
   }
@@ -8,28 +16,39 @@
   .bottomContainer {
     text-align: center;
     .openBtn {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      line-height: 100px;
+      width: 80%;
+      padding: 10px;
       display: block;
       margin: 0 auto;
       text-align: center;
       color: white;
-      background-color: #51d7b9;
+      background-color: #ff8e42;
+      border-radius: 5px;
+      font-size: 22px;
     }
     input {
+      width: 80%;
       padding: 10px;
       border: none;
       border-radius: 5px;
-      background-color: #e2e2e2;
+      background-color: #e5e5e5;
       color: white;
       text-align: center;
       font-size: 22px;
       margin: 20px 0;
     }
     input[placeholder] {
-      color:white;
+      color: white;
+    }
+    h3 {
+      margin-top: 20px;
+      margin-bottom: 20px;
+      color: #959595;
+    }
+    .rules-text {
+      text-align: left;
+      color: #959595;
+      padding: 0 7%;
     }
   }
 }

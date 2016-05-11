@@ -1,15 +1,41 @@
 {
-  "banner":"../common/images/banner.png",
-  "cardBg":"../common/images/cardBg.png",
-  "openBtnText":"拆红包",
-  "openBtnBgColor":"#51d7b9",
-  "rules":{
-    "title":{
-      "text":"活动规则",
-      "color":"#aeaeae"
-    },
-    "detail":{
-      "text":["1.分享活动即可领取新年红包","2.新年红包每领必中"]
-    }
-  }
+  "jsonPURL": "http://192.168.0.231/app/spread/activity",
+  "button_fetch_text_14": "141414",
+  "button_had_pic_15": "http://192.168.0.233:8088/rtc/spread/share/e706d3cbb140417e9e67c26513616666.jpg",
+  "button_share_pic_10": "http://192.168.0.233:8088/rtc/spread/share/fe1b2b52ea534d71aa3bba2bbf6771fd.jpg",
+  "share_rule_12": [
+    "1212121212",
+    "1212121212",
+    "1212121212"
+  ],
+  "shareURL_forQQ": "http://192.168.0.233:8088/rtc/spread/pre_red/share/html/index.html",
+  "button_pic_4": "http://192.168.0.233:8088/rtc/spread/share/e1d95f5c0d1041b5b3114d73f0df36be.jpg",
+  "front_pic_2": "http://192.168.0.233:8088/rtc/spread/share/ad29c12da5ea4582b58e302547161dff.jpg",
+  "button_fetch_pic_13": "http://192.168.0.233:8088/rtc/spread/share/09def2af88184a86a1efbc095e414a0e.jpg",
+  "share_word_8": [
+    "888888888",
+    "8888888",
+    "8888888888"
+  ],
+  "button_name_5": "分享拆红包5",
+  "back_pic_3": "http://192.168.0.233:8088/rtc/spread/share/c0ae4da7c6804828a881634c8307e417.jpg",
+  "share_title_7": [
+    "7777777",
+    "777777777",
+    "777777777"
+  ],
+  "share_pic_9": "http://192.168.0.233:8088/rtc/spread/share/e758d8ba46354313af49d04d13cdb295.jpg",
+  "button_share_name_11": "10101010",
+  "name": "红包160509",
+  "rule_6": [
+    "666666",
+    "66666666",
+    "66666666"
+  ],
+  "shareURL": "http://192.168.0.233:8088/rtc/spread/pre_red/share/html/index.html",
+  "id": "573060cfd3a0a1bfdda29cb8",
+  "beginTime": "2016-05-08 00:00",
+  "endTime": "2016-05-31 23:55",
+  "title_1": "1111111111",
+  "button_had_text_16": "161616"
 }

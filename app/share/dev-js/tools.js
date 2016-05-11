@@ -1,6 +1,7 @@
 /**
  * Created by yantianyu on 2014/12/12.
  */
+;
 var devJudge=(function(){
     var userAgent = window.navigator.userAgent.toLowerCase();
     return {
