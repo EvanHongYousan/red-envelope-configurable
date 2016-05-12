@@ -45,6 +45,10 @@ app.controller('homeController', ['$scope', '$http', '$location', '$rootScope', 
         };
     });
     JSNativeBridge.init(function (id, content) {
+        switch(id){
+            case 'client_msg_already_share':break;
+            default:break;
+        }
     });
 }]);
 
