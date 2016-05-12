@@ -71,13 +71,13 @@ app.controller('homeController', ['$scope', '$http', '$location', '$rootScope', 
 
             $http({
                 method: 'JSONP',
-                url: resp.data.jsonPURL + "?id=" + resp.data.id + "&phone=" + user_id + '&callback=JSON_CALLBACK'
+                url: resp.data.jsonPURL + "?id=" + resp.data.id + "&phone=" + $scope.phoneNumber + '&callback=JSON_CALLBACK'
             }).then(function (data) {
                 console.log(data.data);
                 if (data.data.status == '7' || data.data.status == '1') {
                     storageService.data = {
                         "price": data.data.price,
-                        "phoneNumber": user_id
+                        "phoneNumber": $scope.phoneNumber
                     };
                     $location.path('result');
                 } else {
@@ -107,6 +107,11 @@ app.controller('resultController', ['$scope', '$http', '$rootScope', 'storageSer
         $scope.downloadBtnText = resp.data.button_fetch_text_14;
         $scope.downloadBtnImg = resp.data.button_fetch_pic_13;
     });
+    $scope.price = storageService.data.price;
+    $scope.phoneNumber = storageService.data.phoneNumber;
+    $scope.download = function () {
+        window.location = 'http://www.hjlaoshi.com';
+    };
 }]);
 
 app.run(function () {

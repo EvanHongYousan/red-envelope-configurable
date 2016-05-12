@@ -387,7 +387,7 @@ d){if(0===d)c.push(a);else{var f=a.match(/(\w+)(?:[?*])?(.*)/),g=f[1];c.push(b[g
 //# sourceMappingURL=angular-route.min.js.map
 
 angular.module("templatescache", []).run(["$templateCache", function($templateCache) {$templateCache.put("home.html","<div class=\"home\">\r\n    <div class=\"imgContainer\">\r\n        <img src=\"\" alt=\"\" ng-src=\"{{imgSrc}}\">\r\n    </div>\r\n    <div class=\"bottomContainer\">\r\n        <input type=\"text\" ng-model=\"phoneNumber\" placeholder=\"请输入你的手机号码\" />\r\n        <span class=\"openBtn\" ng-style=\"{\'background-image\': \'url(\'+openBtnBgImg+\')\',\'background-size\':\'100% 100%\'}\" ng-click=\"openRedPackage()\">{{openBtnText}}</span>\r\n        <h3>活动规则</h3>\r\n        <p class=\"rules-text\" ng-repeat=\"item in rulesText track by $index\">{{item}}</p>\r\n    </div>\r\n</div>");
-$templateCache.put("result.html","<div class=\"result\">\r\n    <div class=\"imgContainer\">\r\n        <img src=\"\" alt=\"\" ng-src=\"{{imgSrc}}\">\r\n    </div>\r\n    <div class=\"bottomContainer\">\r\n        <p class=\"slogan\">恭喜你，获得红包</p>\r\n        <div class=\"certificate\">\r\n            <span>&nbsp;&nbsp;&nbsp;50</span>\r\n        </div>\r\n        <span class=\"downloadBtn\" ng-style=\"{\'background-image\': \'url(\'+downloadBtnImg+\')\',\'background-size\':\'100% 100%\'}\">{{downloadBtnText}}</span>\r\n        <p class=\"footerText\">红包已放入手机账户 <span class=\"phoneNumber\">15800031138</span></p>\r\n        <p class=\"footerText\">登入呼叫老师，在个人中心-我的优惠中查看</p>\r\n    </div>\r\n</div>");}]);
+$templateCache.put("result.html","<div class=\"result\">\r\n    <div class=\"imgContainer\">\r\n        <img src=\"\" alt=\"\" ng-src=\"{{imgSrc}}\">\r\n    </div>\r\n    <div class=\"bottomContainer\">\r\n        <p class=\"slogan\">恭喜你，获得红包</p>\r\n        <div class=\"certificate\">\r\n            <span>&nbsp;&nbsp;&nbsp;{{price}}</span>\r\n        </div>\r\n        <span class=\"downloadBtn\" ng-style=\"{\'background-image\': \'url(\'+downloadBtnImg+\')\',\'background-size\':\'100% 100%\'}\" ng-click=\"download()\">{{downloadBtnText}}</span>\r\n        <p class=\"footerText\">红包已放入手机账户 <span class=\"phoneNumber\">{{phoneNumber}}</span></p>\r\n        <p class=\"footerText\">登入呼叫老师，在个人中心-我的优惠中查看</p>\r\n    </div>\r\n</div>");}]);
 /**
  * Created by yantianyu on 2014/12/12.
  */
@@ -534,13 +534,13 @@ app.controller('homeController', ['$scope', '$http', '$location', '$rootScope', 
 
             $http({
                 method: 'JSONP',
-                url: resp.data.jsonPURL + "?id=" + resp.data.id + "&phone=" + user_id + '&callback=JSON_CALLBACK'
+                url: resp.data.jsonPURL + "?id=" + resp.data.id + "&phone=" + $scope.phoneNumber + '&callback=JSON_CALLBACK'
             }).then(function (data) {
                 console.log(data.data);
                 if (data.data.status == '7' || data.data.status == '1') {
                     storageService.data = {
                         "price": data.data.price,
-                        "phoneNumber": user_id
+                        "phoneNumber": $scope.phoneNumber
                     };
                     $location.path('result');
                 } else {
@@ -570,6 +570,11 @@ app.controller('resultController', ['$scope', '$http', '$rootScope', 'storageSer
         $scope.downloadBtnText = resp.data.button_fetch_text_14;
         $scope.downloadBtnImg = resp.data.button_fetch_pic_13;
     });
+    $scope.price = storageService.data.price;
+    $scope.phoneNumber = storageService.data.phoneNumber;
+    $scope.download = function () {
+        window.location = 'http://www.hjlaoshi.com';
+    };
 }]);
 
 app.run(function () {
