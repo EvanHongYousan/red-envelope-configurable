@@ -387,7 +387,7 @@ d){if(0===d)c.push(a);else{var f=a.match(/(\w+)(?:[?*])?(.*)/),g=f[1];c.push(b[g
 //# sourceMappingURL=angular-route.min.js.map
 
 angular.module("templatescache", []).run(["$templateCache", function($templateCache) {$templateCache.put("home.html","<div class=\"home\">\r\n    <div class=\"imgContainer\">\r\n        <img src=\"\" alt=\"\" ng-src=\"{{imgSrc}}\">\r\n    </div>\r\n    <div class=\"bottomContainer\">\r\n        <input type=\"text\" ng-model=\"phoneNumber\" placeholder=\"请输入你的手机号码\" />\r\n        <span class=\"openBtn\" ng-style=\"{\'background-image\': \'url(\'+openBtnBgImg+\')\',\'background-size\':\'100% 100%\'}\" ng-click=\"openRedPackage()\">{{openBtnText}}</span>\r\n        <h3>活动规则</h3>\r\n        <p class=\"rules-text\" ng-repeat=\"item in rulesText track by $index\">{{item}}</p>\r\n    </div>\r\n</div>");
-$templateCache.put("result.html","<div class=\"result\">\r\n    <div class=\"imgContainer\">\r\n        <img src=\"\" alt=\"\" ng-src=\"{{imgSrc}}\">\r\n    </div>\r\n    <div class=\"bottomContainer\">\r\n        <p class=\"slogan\">恭喜你，获得红包</p>\r\n        <span class=\"downloadBtn\" ng-style=\"{\'background-image\': \'url(\'+downloadBtnImg+\')\',\'background-size\':\'100% 100%\'}\">{{downloadBtnText}}</span>\r\n    </div>\r\n</div>");}]);
+$templateCache.put("result.html","<div class=\"result\">\r\n    <div class=\"imgContainer\">\r\n        <img src=\"\" alt=\"\" ng-src=\"{{imgSrc}}\">\r\n    </div>\r\n    <div class=\"bottomContainer\">\r\n        <p class=\"slogan\">恭喜你，获得红包</p>\r\n        <div class=\"certificate\">\r\n            <span>&nbsp;&nbsp;&nbsp;50</span>\r\n        </div>\r\n        <span class=\"downloadBtn\" ng-style=\"{\'background-image\': \'url(\'+downloadBtnImg+\')\',\'background-size\':\'100% 100%\'}\">{{downloadBtnText}}</span>\r\n        <p class=\"footerText\">红包已放入手机账户 <span class=\"phoneNumber\">15800031138</span></p>\r\n        <p class=\"footerText\">登入呼叫老师，在个人中心-我的优惠中查看</p>\r\n    </div>\r\n</div>");}]);
 /**
  * Created by yantianyu on 2014/12/12.
  */
@@ -483,7 +483,10 @@ app.config(['$routeProvider', function ($routeProvider) {
 app.service('configService', function () {
     this.data = [];
 });
-app.controller('homeController', ['$scope', '$http', '$location', '$rootScope', function ($scope, $http, $location, $rootScope) {
+app.service('storageService', function () {
+    this.data = [];
+});
+app.controller('homeController', ['$scope', '$http', '$location', '$rootScope', '$timeout', 'storageService', function ($scope, $http, $location, $rootScope, $timeout, storageService) {
     $http({
         method: 'GET',
         url: '../common/spread.json'
@@ -493,14 +496,72 @@ app.controller('homeController', ['$scope', '$http', '$location', '$rootScope', 
         $scope.phoneNumber = '';
         $scope.openBtnBgImg = resp.data.button_share_pic_10;
         $scope.rulesText = resp.data.share_rule_12;
-    });
 
-    $scope.openRedPackage = function () {
-        $location.path('result');
-    }
+        $scope.openRedPackage = function () {
+            // $location.path('result');
+            var user_id = null, domainName = 'http://192.168.0.231';
+
+            function getReqPrm(name) {
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+                var r = window.location.search.substr(1).match(reg);
+                if (r != null) {
+                    return unescape(r[2]);
+                } else {
+                    return null;
+                }
+            }
+
+            try {
+                user_id = getReqPrm('parameter') ? JSON.parse(decodeURIComponent(getReqPrm('parameter'))).user_id : null;
+            } catch (e) {
+                console.log(e);
+            }
+            if (user_id === null) {
+                user_id = '15800031138';
+            } else {
+                user_id = user_id.split('@')[0];
+            }
+
+            if (/test\.|testftp\./.test(location.href)) {
+                domainName = 'http://test.hjlaoshi.com';
+            } else if (/\.233|\.231/.test(location.href)) {
+                domainName = 'http://192.168.0.231';
+            } else if (/guanli\.|ftp\./.test(location.href)) {
+                domainName = 'http://guanli.hjlaoshi.com';
+            }
+
+            console.log('domainName:' + domainName + '\nuser_id:' + user_id);
+
+            $http({
+                method: 'JSONP',
+                url: resp.data.jsonPURL + "?id=" + resp.data.id + "&phone=" + user_id + '&callback=JSON_CALLBACK'
+            }).then(function (data) {
+                console.log(data.data);
+                if (data.data.status == '7' || data.data.status == '1') {
+                    storageService.data = {
+                        "price": data.data.price,
+                        "phoneNumber": user_id
+                    };
+                    $location.path('result');
+                } else {
+                    $rootScope.alertText = data.data.msg;
+                    $rootScope.alertMode = 'hover';
+                    $timeout(function () {
+                        $rootScope.alertMode = '';
+                    }, 5000);
+                }
+            }, function (error) {
+                $rootScope.alertText = "网络断开";
+                $rootScope.alertMode = 'hover';
+                $timeout(function () {
+                    $rootScope.alertMode = '';
+                }, 5000);
+            });
+        }
+    });
 }]);
 
-app.controller('resultController', ['$scope', '$http', '$rootScope', function ($scope, $http, $rootScope) {
+app.controller('resultController', ['$scope', '$http', '$rootScope', 'storageService', function ($scope, $http, $rootScope, storageService) {
     $http({
         method: 'GET',
         url: '../common/spread.json'
@@ -508,7 +569,6 @@ app.controller('resultController', ['$scope', '$http', '$rootScope', function ($
         $scope.imgSrc = resp.data.front_pic_2;
         $scope.downloadBtnText = resp.data.button_fetch_text_14;
         $scope.downloadBtnImg = resp.data.button_fetch_pic_13;
-        $scope.rulesText = resp.data.share_rule_12;
     });
 }]);
 

@@ -5,20 +5,37 @@
   right: 0;
   height: 100%;
 }
+
 .slideup.ng-enter,
 .slideup.ng-leave {
   -webkit-transition: all 1s ease;
   transition: all 1s ease;
 }
+
 .slideup.ng-enter {
-  top: 100%;
+  -webkit-transform: translate(0, 100%);
+  -moz-transform: translate(0, 100%);
+  -o-transform: translate(0, 100%);
+  transform: translate(0, 100%);
 }
+
 .slideup.ng-enter-active {
-  top: 0;
+  -webkit-transform: translate(0, 0);
+  -moz-transform: translate(0, 0);
+  -o-transform: translate(0, 0);
+  transform: translate(0, 0);
 }
+
 .slideup.ng-leave {
-  top: 0;
+  -webkit-transform: translate(0, 0);
+  -moz-transform: translate(0, 0);
+  -o-transform: translate(0, 0);
+  transform: translate(0, 0);
 }
+
 .slideup.ng-leave-active {
-  top: -100%;
+  -webkit-transform: translate(0, -100%);
+  -moz-transform: translate(0, -100%);
+  -o-transform: translate(0, -100%);
+  transform: translate(0, -100%);
 }

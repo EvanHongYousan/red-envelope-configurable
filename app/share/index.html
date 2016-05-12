@@ -9,6 +9,9 @@
     <script src="js/total.min.js"></script>
 </head>
 <body>
-<div ng-view class="slideup"></div>
+<span class="alert {{alertMode}}">
+    <p>{{alertText}}</p>
+</span>
+<div ng-view class="slideup container"></div>
 </body>
 </html>
