@@ -1,0 +1,12 @@
+<div class="home">
+    <div class="imgContainer">
+        <img src="" alt="" ng-src="{{imgSrc}}">
+    </div>
+    <div class="bottomContainer">
+        <p class="slogan">分享给好友，赢红包</p>
+        <span class="shareBtn" ng-style="{'background-image': 'url('+openBtnBgImg+')','background-size':'100% 100%'}" ng-click="share()">{{shareBtnText}}</span>
+        <h3>活动规则</h3>
+        <p class="rules-text" ng-repeat="item in rulesText track by $index">{{item}}</p>
+        <p class="footer-text">WWW.HJLAOSHI.COM</p>
+    </div>
+</div>

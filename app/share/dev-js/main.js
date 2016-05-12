@@ -113,7 +113,3 @@ app.controller('resultController', ['$scope', '$http', '$rootScope', 'storageSer
         window.location = 'http://www.hjlaoshi.com';
     };
 }]);
-
-app.run(function () {
-    JSNativeBridge.init();
-});
