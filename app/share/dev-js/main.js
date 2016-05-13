@@ -35,39 +35,8 @@ app.controller('homeController', ['$scope', '$http', '$location', '$rootScope', 
         $rootScope.pageTitle = resp.data.title_1;
 
         $scope.openRedPackage = function () {
-            // $location.path('result');
-            var user_id = null, domainName = 'http://192.168.0.231';
 
-            function getReqPrm(name) {
-                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-                var r = window.location.search.substr(1).match(reg);
-                if (r != null) {
-                    return unescape(r[2]);
-                } else {
-                    return null;
-                }
-            }
-
-            try {
-                user_id = getReqPrm('parameter') ? JSON.parse(decodeURIComponent(getReqPrm('parameter'))).user_id : null;
-            } catch (e) {
-                console.log(e);
-            }
-            if (user_id === null) {
-                user_id = '15800031138';
-            } else {
-                user_id = user_id.split('@')[0];
-            }
-
-            if (/test\.|testftp\./.test(location.href)) {
-                domainName = 'http://test.hjlaoshi.com';
-            } else if (/\.233|\.231/.test(location.href)) {
-                domainName = 'http://192.168.0.231';
-            } else if (/guanli\.|ftp\./.test(location.href)) {
-                domainName = 'http://guanli.hjlaoshi.com';
-            }
-
-            console.log('domainName:' + domainName + '\nuser_id:' + user_id);
+            console.log('resp.data.jsonPURL :' + resp.data.jsonPURL);
 
             $http({
                 method: 'JSONP',
@@ -98,7 +67,7 @@ app.controller('homeController', ['$scope', '$http', '$location', '$rootScope', 
 
         $http({
             method: 'JSONP',
-            url: "http://test.hjlaoshi.com" + '/nb_static/get_js_sdk_config?url=' + Base64.encode(location.href.split('#')[0]) + '&callback=JSON_CALLBACK'
+            url: resp.data.jsonPURL.split('/app/')[0] + '/nb_static/get_js_sdk_config?url=' + Base64.encode(location.href.split('#')[0]) + '&callback=JSON_CALLBACK'
         }).then(function (data) {
             var configObj = data.data;
             configObj.jsApiList = ['hideOptionMenu', 'onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareWeibo', 'onMenuShareQZone'];
@@ -143,9 +112,9 @@ app.controller('homeController', ['$scope', '$http', '$location', '$rootScope', 
     });
 }]);
 
-app.controller('resultController', ['$scope', '$http', '$rootScope', 'storageService', '$location', function ($scope, $http, $rootScope, storageService, $location) {
-    if (storageService.data == []) {
-        $location.path('result');
+app.controller('resultController', ['$scope', '$http', '$rootScope', 'storageService', '$location', '$timeout', function ($scope, $http, $rootScope, storageService, $location, $timeout) {
+    if (storageService.data.length == 0) {
+        $location.path('home');
     }
     $http({
         method: 'GET',
