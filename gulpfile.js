@@ -51,7 +51,7 @@ gulp.task('minifyjs', function () {
             'app/bower_components/angular-animate/angular-animate.min.js',
             'app/bower_components/angular-route/angular-route.min.js',
             'app/share/dev-js/templates.js',
-            // 'app/share/dev-js/tools.js',
+            'app/share/dev-js/base64.min.js',
             'app/share/dev-js/main.js'])
         .pipe(concat('total.js'))    //合并所有js到
         .pipe(gulp.dest('app/share/js'))    //输出js到文件夹

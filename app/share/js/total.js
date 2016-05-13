@@ -388,79 +388,7 @@ d){if(0===d)c.push(a);else{var f=a.match(/(\w+)(?:[?*])?(.*)/),g=f[1];c.push(b[g
 
 angular.module("templatescache", []).run(["$templateCache", function($templateCache) {$templateCache.put("home.html","<div class=\"home\">\r\n    <div class=\"imgContainer\">\r\n        <img src=\"\" alt=\"\" ng-src=\"{{imgSrc}}\">\r\n    </div>\r\n    <div class=\"bottomContainer\">\r\n        <input type=\"text\" ng-model=\"phoneNumber\" placeholder=\"请输入你的手机号码\" />\r\n        <span class=\"openBtn\" ng-style=\"{\'background-image\': \'url(\'+openBtnBgImg+\')\',\'background-size\':\'100% 100%\'}\" ng-click=\"openRedPackage()\">{{openBtnText}}</span>\r\n        <h3>活动规则</h3>\r\n        <p class=\"rules-text\" ng-repeat=\"item in rulesText track by $index\">{{item}}</p>\r\n    </div>\r\n</div>");
 $templateCache.put("result.html","<div class=\"result\">\r\n    <div class=\"imgContainer\">\r\n        <img src=\"\" alt=\"\" ng-src=\"{{imgSrc}}\">\r\n    </div>\r\n    <div class=\"bottomContainer\">\r\n        <p class=\"slogan\">恭喜你，获得红包</p>\r\n        <div class=\"certificate\">\r\n            <span>&nbsp;&nbsp;&nbsp;{{price}}</span>\r\n        </div>\r\n        <span class=\"downloadBtn\" ng-style=\"{\'background-image\': \'url(\'+downloadBtnImg+\')\',\'background-size\':\'100% 100%\'}\" ng-click=\"download()\">{{downloadBtnText}}</span>\r\n        <p class=\"footerText\">红包已放入手机账户 <span class=\"phoneNumber\">{{phoneNumber}}</span></p>\r\n        <p class=\"footerText\">登入呼叫老师，在个人中心-我的优惠中查看</p>\r\n    </div>\r\n</div>");}]);
-/**
- * Created by yantianyu on 2014/12/12.
- */
-;
-var devJudge=(function(){
-    var userAgent = window.navigator.userAgent.toLowerCase();
-    return {
-        isWeixin:function(){
-            return userAgent.indexOf('micromessenger') > 0;
-        },
-        isAndroid:function(){
-            return userAgent.indexOf('android') > 0;
-        },
-        isIOS:function(){
-            return /iphone/i.test(userAgent) || /ipod/i.test(userAgent) || /ipad/i.test(userAgent);
-        },
-        isHjlaoshi:function(){
-            return /Hjlaoshi/i.test(userAgent);
-        }
-    }
-})();
-
-var JSNativeBridge = (function(){
-    var _handler = null;
-    var oriURL = window.location.href;
-    function _send(id, content) {
-        uplusInterface.postWebpageMessage(id, encodeURIComponent(JSON.stringify(!content ? '' : content)));
-    }
-
-    function _receive(msg, msg_content) {
-        _handler(msg, msg_content);
-    }
-
-    function _addHandler(handler) {
-        _handler = handler;
-    }
-
-    return {
-        send: function(id, content) {
-            _send(id, content);
-        },
-
-        receive: function(msg_id, msg_content) {
-            try {
-                _receive(msg_id, JSON.parse(decodeURIComponent(msg_content)));
-            } catch(e) {
-
-            }
-        },
-        postNativeMessage: function() {
-            JSNativeBridge.receive.apply(this, arguments);
-        },
-
-        init: function(handler) {
-            if(!window.uplusInterface) {
-                uplusInterface = {};
-                uplusInterface.postWebpageMessage = function(id, content) {
-                    //window.location.href = oriURL + '#msg_id=' + id + '&msg_content=' + content;
-                    var iframe = document.createElement("iframe");
-                    iframe.src = oriURL + '#msg_id=' + id + '&msg_content=' + content;
-                    iframe.style.display = 'none';
-                    document.body.appendChild(iframe);
-                    iframe.parentNode.removeChild(iframe);
-                    iframe = null;
-                }
-            }
-            if(!devJudge.isHjlaoshi()){
-                uplusInterface.postWebpageMessage = function(id, content){};
-            }
-            _addHandler(handler);
-        }
-    }
-}());
+(function(global){"use strict";var _Base64=global.Base64;var version="2.1.9";var buffer;if(typeof module!=="undefined"&&module.exports){try{buffer=require("buffer").Buffer}catch(err){}}var b64chars="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";var b64tab=function(bin){var t={};for(var i=0,l=bin.length;i<l;i++)t[bin.charAt(i)]=i;return t}(b64chars);var fromCharCode=String.fromCharCode;var cb_utob=function(c){if(c.length<2){var cc=c.charCodeAt(0);return cc<128?c:cc<2048?fromCharCode(192|cc>>>6)+fromCharCode(128|cc&63):fromCharCode(224|cc>>>12&15)+fromCharCode(128|cc>>>6&63)+fromCharCode(128|cc&63)}else{var cc=65536+(c.charCodeAt(0)-55296)*1024+(c.charCodeAt(1)-56320);return fromCharCode(240|cc>>>18&7)+fromCharCode(128|cc>>>12&63)+fromCharCode(128|cc>>>6&63)+fromCharCode(128|cc&63)}};var re_utob=/[\uD800-\uDBFF][\uDC00-\uDFFFF]|[^\x00-\x7F]/g;var utob=function(u){return u.replace(re_utob,cb_utob)};var cb_encode=function(ccc){var padlen=[0,2,1][ccc.length%3],ord=ccc.charCodeAt(0)<<16|(ccc.length>1?ccc.charCodeAt(1):0)<<8|(ccc.length>2?ccc.charCodeAt(2):0),chars=[b64chars.charAt(ord>>>18),b64chars.charAt(ord>>>12&63),padlen>=2?"=":b64chars.charAt(ord>>>6&63),padlen>=1?"=":b64chars.charAt(ord&63)];return chars.join("")};var btoa=global.btoa?function(b){return global.btoa(b)}:function(b){return b.replace(/[\s\S]{1,3}/g,cb_encode)};var _encode=buffer?function(u){return(u.constructor===buffer.constructor?u:new buffer(u)).toString("base64")}:function(u){return btoa(utob(u))};var encode=function(u,urisafe){return!urisafe?_encode(String(u)):_encode(String(u)).replace(/[+\/]/g,function(m0){return m0=="+"?"-":"_"}).replace(/=/g,"")};var encodeURI=function(u){return encode(u,true)};var re_btou=new RegExp(["[À-ß][-¿]","[à-ï][-¿]{2}","[ð-÷][-¿]{3}"].join("|"),"g");var cb_btou=function(cccc){switch(cccc.length){case 4:var cp=(7&cccc.charCodeAt(0))<<18|(63&cccc.charCodeAt(1))<<12|(63&cccc.charCodeAt(2))<<6|63&cccc.charCodeAt(3),offset=cp-65536;return fromCharCode((offset>>>10)+55296)+fromCharCode((offset&1023)+56320);case 3:return fromCharCode((15&cccc.charCodeAt(0))<<12|(63&cccc.charCodeAt(1))<<6|63&cccc.charCodeAt(2));default:return fromCharCode((31&cccc.charCodeAt(0))<<6|63&cccc.charCodeAt(1))}};var btou=function(b){return b.replace(re_btou,cb_btou)};var cb_decode=function(cccc){var len=cccc.length,padlen=len%4,n=(len>0?b64tab[cccc.charAt(0)]<<18:0)|(len>1?b64tab[cccc.charAt(1)]<<12:0)|(len>2?b64tab[cccc.charAt(2)]<<6:0)|(len>3?b64tab[cccc.charAt(3)]:0),chars=[fromCharCode(n>>>16),fromCharCode(n>>>8&255),fromCharCode(n&255)];chars.length-=[0,0,2,1][padlen];return chars.join("")};var atob=global.atob?function(a){return global.atob(a)}:function(a){return a.replace(/[\s\S]{1,4}/g,cb_decode)};var _decode=buffer?function(a){return(a.constructor===buffer.constructor?a:new buffer(a,"base64")).toString()}:function(a){return btou(atob(a))};var decode=function(a){return _decode(String(a).replace(/[-_]/g,function(m0){return m0=="-"?"+":"/"}).replace(/[^A-Za-z0-9\+\/]/g,""))};var noConflict=function(){var Base64=global.Base64;global.Base64=_Base64;return Base64};global.Base64={VERSION:version,atob:atob,btoa:btoa,fromBase64:decode,toBase64:encode,utob:utob,encode:encode,encodeURI:encodeURI,btou:btou,decode:decode,noConflict:noConflict};if(typeof Object.defineProperty==="function"){var noEnum=function(v){return{value:v,enumerable:false,writable:true,configurable:true}};global.Base64.extendString=function(){Object.defineProperty(String.prototype,"fromBase64",noEnum(function(){return decode(this)}));Object.defineProperty(String.prototype,"toBase64",noEnum(function(urisafe){return encode(this,urisafe)}));Object.defineProperty(String.prototype,"toBase64URI",noEnum(function(){return encode(this,true)}))}}if(global["Meteor"]){Base64=global.Base64}})(this);
 /**
  * Created by yantianyu on 2016/5/6 0006.
  */
@@ -476,7 +404,6 @@ app.config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'result.html',
             controller: 'resultController'
         })
-
         .otherwise('/home');
 
 }]);
@@ -496,6 +423,7 @@ app.controller('homeController', ['$scope', '$http', '$location', '$rootScope', 
         $scope.phoneNumber = '';
         $scope.openBtnBgImg = resp.data.button_share_pic_10;
         $scope.rulesText = resp.data.share_rule_12;
+        $rootScope.pageTitle = resp.data.title_1;
 
         $scope.openRedPackage = function () {
             // $location.path('result');
@@ -557,7 +485,41 @@ app.controller('homeController', ['$scope', '$http', '$location', '$rootScope', 
                     $rootScope.alertMode = '';
                 }, 5000);
             });
-        }
+        };
+
+        $http({
+            method: 'JSONP',
+            url: "http://test.hjlaoshi.com" + '/nb_static/get_js_sdk_config?url=' + Base64.encode(location.href) + '&callback=JSON_CALLBACK'
+        }).then(function (data) {
+            var configObj = data.data;
+            configObj.jsApiList = ['hideOptionMenu','onMenuShareTimeline','onMenuShareAppMessage','onMenuShareQQ','onMenuShareWeibo','onMenuShareQZone'];
+            configObj.debug = true;
+            wx.config(configObj);
+            wx.ready(function () {
+                var shareCFObj = {
+                    title: resp.data.share_title_7[Math.floor(Math.random()*3)] || resp.data.share_title_7[0], // 分享标题
+                    desc: resp.data.share_word_8[Math.floor(Math.random()*3)] || resp.data.share_word_8[0], // 分享描述
+                    link: resp.data.shareURL, // 分享链接
+                    imgUrl: resp.data.share_pic_9, // 分享图标
+                    type: '', // 分享类型,music、video或link，不填默认为link
+                    dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+                    success: function () {
+                        // 用户确认分享后执行的回调函数
+                    },
+                    cancel: function () {
+                        // 用户取消分享后执行的回调函数
+                    }
+                };
+                // wx.hideOptionMenu();
+                wx.onMenuShareTimeline(shareCFObj);
+                wx.onMenuShareAppMessage(shareCFObj);
+                wx.onMenuShareQQ(shareCFObj);
+                wx.onMenuShareWeibo(shareCFObj);
+                wx.onMenuShareQZone(shareCFObj);
+            });
+        }, function (error) {
+            console.log(error);
+        });
     });
 }]);
 
@@ -569,6 +531,40 @@ app.controller('resultController', ['$scope', '$http', '$rootScope', 'storageSer
         $scope.imgSrc = resp.data.front_pic_2;
         $scope.downloadBtnText = resp.data.button_fetch_text_14;
         $scope.downloadBtnImg = resp.data.button_fetch_pic_13;
+
+        $http({
+            method: 'JSONP',
+            url: "http://test.hjlaoshi.com" + '/nb_static/get_js_sdk_config?url=' + Base64.encode(location.href) + '&callback=JSON_CALLBACK'
+        }).then(function (data) {
+            var configObj = data.data;
+            configObj.jsApiList = ['hideOptionMenu','onMenuShareTimeline','onMenuShareAppMessage','onMenuShareQQ','onMenuShareWeibo','onMenuShareQZone'];
+            configObj.debug = true;
+            wx.config(configObj);
+            wx.ready(function () {
+                var shareCFObj = {
+                    title: resp.data.share_title_7[Math.floor(Math.random()*3)] || resp.data.share_title_7[0], // 分享标题
+                    desc: resp.data.share_word_8[Math.floor(Math.random()*3)] || resp.data.share_word_8[0], // 分享描述
+                    link: resp.data.shareURL, // 分享链接
+                    imgUrl: resp.data.share_pic_9, // 分享图标
+                    type: '', // 分享类型,music、video或link，不填默认为link
+                    dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+                    success: function () {
+                        // 用户确认分享后执行的回调函数
+                    },
+                    cancel: function () {
+                        // 用户取消分享后执行的回调函数
+                    }
+                };
+                // wx.hideOptionMenu();
+                wx.onMenuShareTimeline(shareCFObj);
+                wx.onMenuShareAppMessage(shareCFObj);
+                wx.onMenuShareQQ(shareCFObj);
+                wx.onMenuShareWeibo(shareCFObj);
+                wx.onMenuShareQZone(shareCFObj);
+            });
+        }, function (error) {
+            console.log(error);
+        });
     });
     $scope.price = storageService.data.price;
     $scope.phoneNumber = storageService.data.phoneNumber;

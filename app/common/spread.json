@@ -1,41 +1,42 @@
 {
-  "jsonPURL": "http://192.168.0.231/app/spread/activity",
-  "button_fetch_text_14": "141414",
-  "button_had_pic_15": "http://192.168.0.233:8088/rtc/spread/share/e706d3cbb140417e9e67c26513616666.jpg",
-  "button_share_pic_10": "http://192.168.0.233:8088/rtc/spread/share/fe1b2b52ea534d71aa3bba2bbf6771fd.jpg",
+  "jsonPURL": "http://test.hjlaoshi.com/app/spread/activity",
+  "button_fetch_text_14": "邀请好友一起来",
+  "button_had_pic_15": "http://testftp.hjlaoshi.com/rtc/spread/share/7e6b30659fad4e868373dc0a29e50ccb.png",
+  "button_share_pic_10": "http://testftp.hjlaoshi.com/rtc/spread/share/6e5cd3b07732422da07656f62bc83b69.png",
   "share_rule_12": [
-    "1212121212",
-    "1212121212",
-    "1212121212"
+    "北大录取，",
+    "一月一日报道。",
+    "感谢呼叫老师的状元专项红包",
+    "发给小伙伴，",
+    "找清华同学"
   ],
-  "shareURL_forQQ": "http://192.168.0.233:8088/rtc/spread/pre_red/share/html/index.html",
-  "button_pic_4": "http://192.168.0.233:8088/rtc/spread/share/e1d95f5c0d1041b5b3114d73f0df36be.jpg",
-  "front_pic_2": "http://192.168.0.233:8088/rtc/spread/share/ad29c12da5ea4582b58e302547161dff.jpg",
-  "button_fetch_pic_13": "http://192.168.0.233:8088/rtc/spread/share/09def2af88184a86a1efbc095e414a0e.jpg",
+  "shareURL_forQQ": "http://testftp.hjlaoshi.com/rtc/spread/pre_red/share/html/index.html",
+  "button_pic_4": "http://testftp.hjlaoshi.com/rtc/spread/share/d3cf39765c934e569418340bc75eb00b.png",
+  "front_pic_2": "http://testftp.hjlaoshi.com/rtc/spread/share/06b0bd9f3775469697c039bbd4f13a66.png",
+  "button_fetch_pic_13": "http://testftp.hjlaoshi.com/rtc/spread/share/d67e2d79fa734660b9f63de300e14271.png",
   "share_word_8": [
-    "888888888",
-    "8888888",
-    "8888888888"
+    "爸爸妈妈我被北大录取啦！"
   ],
-  "button_name_5": "分享拆红包5",
-  "back_pic_3": "http://192.168.0.233:8088/rtc/spread/share/c0ae4da7c6804828a881634c8307e417.jpg",
+  "button_name_5": "立即分享",
+  "back_pic_3": "http://testftp.hjlaoshi.com/rtc/spread/share/11e15e7fde024551964fb1c48401b346.png",
   "share_title_7": [
-    "7777777",
-    "777777777",
-    "777777777"
+    "你被北大录取啦！"
   ],
-  "share_pic_9": "http://192.168.0.233:8088/rtc/spread/share/e758d8ba46354313af49d04d13cdb295.jpg",
-  "button_share_name_11": "10101010",
-  "name": "红包160509",
+  "share_pic_9": "http://testftp.hjlaoshi.com/rtc/spread/share/50a52616a99a48a9890bbed5ae0ecad3.png",
+  "button_share_name_11": "立即分享",
+  "name": "中考冲刺大礼包，状元专享",
   "rule_6": [
-    "666666",
-    "66666666",
-    "66666666"
+    "1.",
+    "状元专享！",
+    "2.",
+    "抢到就是状元！",
+    "3.",
+    "语数英都全市第一！！！！！！！！！！"
   ],
-  "shareURL": "http://192.168.0.233:8088/rtc/spread/pre_red/share/html/index.html",
-  "id": "573060cfd3a0a1bfdda29cb8",
-  "beginTime": "2016-05-08 00:00",
+  "shareURL": "http://testftp.hjlaoshi.com/rtc/spread/pre_red/share/html/index.html",
+  "id": "573463ba0cf26057cfd531f3",
+  "beginTime": "2016-05-12 00:00",
   "endTime": "2016-05-31 23:55",
-  "title_1": "1111111111",
-  "button_had_text_16": "161616"
+  "title_1": "中考大礼包，状元专享",
+  "button_had_text_16": "邀请好友一起来"
 }
