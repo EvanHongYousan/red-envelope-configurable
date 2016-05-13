@@ -25,7 +25,7 @@ app.service('storageService', function () {
 app.controller('homeController', ['$scope', '$http', '$location', '$rootScope', '$timeout', 'storageService', function ($scope, $http, $location, $rootScope, $timeout, storageService) {
     $http({
         method: 'GET',
-        url: '../common/spread.json'
+        url: '../../common/spread.json'
     }).then(function (resp) {
         $scope.imgSrc = resp.data.front_pic_2;
         $scope.openBtnText = resp.data.button_share_name_11;
@@ -98,16 +98,16 @@ app.controller('homeController', ['$scope', '$http', '$location', '$rootScope', 
 
         $http({
             method: 'JSONP',
-            url: "http://test.hjlaoshi.com" + '/nb_static/get_js_sdk_config?url=' + Base64.encode(location.href) + '&callback=JSON_CALLBACK'
+            url: "http://test.hjlaoshi.com" + '/nb_static/get_js_sdk_config?url=' + Base64.encode(location.href.split('#')[0]) + '&callback=JSON_CALLBACK'
         }).then(function (data) {
             var configObj = data.data;
-            configObj.jsApiList = ['hideOptionMenu','onMenuShareTimeline','onMenuShareAppMessage','onMenuShareQQ','onMenuShareWeibo','onMenuShareQZone'];
-            configObj.debug = true;
+            configObj.jsApiList = ['hideOptionMenu', 'onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareWeibo', 'onMenuShareQZone'];
+            configObj.debug = false;
             wx.config(configObj);
             wx.ready(function () {
                 var shareCFObj = {
-                    title: resp.data.share_title_7[Math.floor(Math.random()*3)] || resp.data.share_title_7[0], // 分享标题
-                    desc: resp.data.share_word_8[Math.floor(Math.random()*3)] || resp.data.share_word_8[0], // 分享描述
+                    title: resp.data.share_title_7[Math.floor(Math.random() * 3)] || resp.data.share_title_7[0], // 分享标题
+                    desc: resp.data.share_word_8[Math.floor(Math.random() * 3)] || resp.data.share_word_8[0], // 分享描述
                     link: resp.data.shareURL, // 分享链接
                     imgUrl: resp.data.share_pic_9, // 分享图标
                     type: '', // 分享类型,music、video或link，不填默认为link
@@ -124,7 +124,18 @@ app.controller('homeController', ['$scope', '$http', '$location', '$rootScope', 
                 wx.onMenuShareAppMessage(shareCFObj);
                 wx.onMenuShareQQ(shareCFObj);
                 wx.onMenuShareWeibo(shareCFObj);
-                wx.onMenuShareQZone(shareCFObj);
+                wx.onMenuShareQZone({
+                    title: resp.data.share_title_7[Math.floor(Math.random() * 3)] || resp.data.share_title_7[0], // 分享标题
+                    desc: resp.data.share_word_8[Math.floor(Math.random() * 3)] || resp.data.share_word_8[0], // 分享描述
+                    link: resp.data.shareURL, // 分享链接
+                    imgUrl: resp.data.share_pic_9, // 分享图标
+                    success: function () {
+                        // 用户确认分享后执行的回调函数
+                    },
+                    cancel: function () {
+                        // 用户取消分享后执行的回调函数
+                    }
+                });
             });
         }, function (error) {
             console.log(error);
@@ -132,48 +143,17 @@ app.controller('homeController', ['$scope', '$http', '$location', '$rootScope', 
     });
 }]);
 
-app.controller('resultController', ['$scope', '$http', '$rootScope', 'storageService', function ($scope, $http, $rootScope, storageService) {
+app.controller('resultController', ['$scope', '$http', '$rootScope', 'storageService', '$location', function ($scope, $http, $rootScope, storageService, $location) {
+    if (storageService.data == []) {
+        $location.path('result');
+    }
     $http({
         method: 'GET',
-        url: '../common/spread.json'
+        url: '../../common/spread.json'
     }).then(function (resp) {
         $scope.imgSrc = resp.data.front_pic_2;
         $scope.downloadBtnText = resp.data.button_fetch_text_14;
         $scope.downloadBtnImg = resp.data.button_fetch_pic_13;
-
-        $http({
-            method: 'JSONP',
-            url: "http://test.hjlaoshi.com" + '/nb_static/get_js_sdk_config?url=' + Base64.encode(location.href) + '&callback=JSON_CALLBACK'
-        }).then(function (data) {
-            var configObj = data.data;
-            configObj.jsApiList = ['hideOptionMenu','onMenuShareTimeline','onMenuShareAppMessage','onMenuShareQQ','onMenuShareWeibo','onMenuShareQZone'];
-            configObj.debug = true;
-            wx.config(configObj);
-            wx.ready(function () {
-                var shareCFObj = {
-                    title: resp.data.share_title_7[Math.floor(Math.random()*3)] || resp.data.share_title_7[0], // 分享标题
-                    desc: resp.data.share_word_8[Math.floor(Math.random()*3)] || resp.data.share_word_8[0], // 分享描述
-                    link: resp.data.shareURL, // 分享链接
-                    imgUrl: resp.data.share_pic_9, // 分享图标
-                    type: '', // 分享类型,music、video或link，不填默认为link
-                    dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-                    success: function () {
-                        // 用户确认分享后执行的回调函数
-                    },
-                    cancel: function () {
-                        // 用户取消分享后执行的回调函数
-                    }
-                };
-                // wx.hideOptionMenu();
-                wx.onMenuShareTimeline(shareCFObj);
-                wx.onMenuShareAppMessage(shareCFObj);
-                wx.onMenuShareQQ(shareCFObj);
-                wx.onMenuShareWeibo(shareCFObj);
-                wx.onMenuShareQZone(shareCFObj);
-            });
-        }, function (error) {
-            console.log(error);
-        });
     });
     $scope.price = storageService.data.price;
     $scope.phoneNumber = storageService.data.phoneNumber;

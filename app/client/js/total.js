@@ -386,11 +386,83 @@ d){if(0===d)c.push(a);else{var f=a.match(/(\w+)(?:[?*])?(.*)/),g=f[1];c.push(b[g
 }};a.$on("$locationChangeStart",l);a.$on("$locationChangeSuccess",m);return s}]}),B=d.$$minErr("ngRoute");w.provider("$routeParams",function(){this.$get=function(){return{}}});w.directive("ngView",z);w.directive("ngView",A);z.$inject=["$route","$anchorScroll","$animate"];A.$inject=["$compile","$controller","$route"]})(window,window.angular);
 //# sourceMappingURL=angular-route.min.js.map
 
-angular.module("templatescache", []).run(["$templateCache", function($templateCache) {$templateCache.put("home.html","<div class=\"home\">\r\n    <div class=\"imgContainer\">\r\n        <img src=\"\" alt=\"\" ng-src=\"{{imgSrc}}\">\r\n    </div>\r\n    <div class=\"bottomContainer\">\r\n        <input type=\"text\" ng-model=\"phoneNumber\" placeholder=\"请输入你的手机号码\" />\r\n        <span class=\"openBtn\" ng-style=\"{\'background-image\': \'url(\'+openBtnBgImg+\')\',\'background-size\':\'100% 100%\'}\" ng-click=\"openRedPackage()\">{{openBtnText}}</span>\r\n        <h3>活动规则</h3>\r\n        <p class=\"rules-text\" ng-repeat=\"item in rulesText track by $index\">{{item}}</p>\r\n    </div>\r\n</div>");
+angular.module("templatescache", []).run(["$templateCache", function($templateCache) {$templateCache.put("home.html","<div class=\"home\">\r\n    <div class=\"imgContainer\">\r\n        <img src=\"\" alt=\"\" ng-src=\"{{imgSrc}}\">\r\n    </div>\r\n    <div class=\"bottomContainer\">\r\n        <p class=\"slogan\">分享给好友，赢红包</p>\r\n        <span class=\"shareBtn\" ng-style=\"{\'background-image\': \'url(\'+openBtnBgImg+\')\',\'background-size\':\'100% 100%\'}\" ng-click=\"share()\">{{shareBtnText}}</span>\r\n        <h3>活动规则</h3>\r\n        <p class=\"rules-text\" ng-repeat=\"item in rulesText track by $index\">{{item}}</p>\r\n        <p class=\"footer-text\">WWW.HJLAOSHI.COM</p>\r\n    </div>\r\n</div>");
 $templateCache.put("result.html","<div class=\"result\">\r\n    <div class=\"imgContainer\">\r\n        <img src=\"\" alt=\"\" ng-src=\"{{imgSrc}}\">\r\n    </div>\r\n    <div class=\"bottomContainer\">\r\n        <p class=\"slogan\">恭喜你，获得红包</p>\r\n        <div class=\"certificate\">\r\n            <span>&nbsp;&nbsp;&nbsp;{{price}}</span>\r\n        </div>\r\n        <span class=\"downloadBtn\" ng-style=\"{\'background-image\': \'url(\'+downloadBtnImg+\')\',\'background-size\':\'100% 100%\'}\" ng-click=\"download()\">{{downloadBtnText}}</span>\r\n        <p class=\"footerText\">红包已放入手机账户 <span class=\"phoneNumber\">{{phoneNumber}}</span></p>\r\n        <p class=\"footerText\">登入呼叫老师，在个人中心-我的优惠中查看</p>\r\n    </div>\r\n</div>");}]);
-(function(global){"use strict";var _Base64=global.Base64;var version="2.1.9";var buffer;if(typeof module!=="undefined"&&module.exports){try{buffer=require("buffer").Buffer}catch(err){}}var b64chars="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";var b64tab=function(bin){var t={};for(var i=0,l=bin.length;i<l;i++)t[bin.charAt(i)]=i;return t}(b64chars);var fromCharCode=String.fromCharCode;var cb_utob=function(c){if(c.length<2){var cc=c.charCodeAt(0);return cc<128?c:cc<2048?fromCharCode(192|cc>>>6)+fromCharCode(128|cc&63):fromCharCode(224|cc>>>12&15)+fromCharCode(128|cc>>>6&63)+fromCharCode(128|cc&63)}else{var cc=65536+(c.charCodeAt(0)-55296)*1024+(c.charCodeAt(1)-56320);return fromCharCode(240|cc>>>18&7)+fromCharCode(128|cc>>>12&63)+fromCharCode(128|cc>>>6&63)+fromCharCode(128|cc&63)}};var re_utob=/[\uD800-\uDBFF][\uDC00-\uDFFFF]|[^\x00-\x7F]/g;var utob=function(u){return u.replace(re_utob,cb_utob)};var cb_encode=function(ccc){var padlen=[0,2,1][ccc.length%3],ord=ccc.charCodeAt(0)<<16|(ccc.length>1?ccc.charCodeAt(1):0)<<8|(ccc.length>2?ccc.charCodeAt(2):0),chars=[b64chars.charAt(ord>>>18),b64chars.charAt(ord>>>12&63),padlen>=2?"=":b64chars.charAt(ord>>>6&63),padlen>=1?"=":b64chars.charAt(ord&63)];return chars.join("")};var btoa=global.btoa?function(b){return global.btoa(b)}:function(b){return b.replace(/[\s\S]{1,3}/g,cb_encode)};var _encode=buffer?function(u){return(u.constructor===buffer.constructor?u:new buffer(u)).toString("base64")}:function(u){return btoa(utob(u))};var encode=function(u,urisafe){return!urisafe?_encode(String(u)):_encode(String(u)).replace(/[+\/]/g,function(m0){return m0=="+"?"-":"_"}).replace(/=/g,"")};var encodeURI=function(u){return encode(u,true)};var re_btou=new RegExp(["[À-ß][-¿]","[à-ï][-¿]{2}","[ð-÷][-¿]{3}"].join("|"),"g");var cb_btou=function(cccc){switch(cccc.length){case 4:var cp=(7&cccc.charCodeAt(0))<<18|(63&cccc.charCodeAt(1))<<12|(63&cccc.charCodeAt(2))<<6|63&cccc.charCodeAt(3),offset=cp-65536;return fromCharCode((offset>>>10)+55296)+fromCharCode((offset&1023)+56320);case 3:return fromCharCode((15&cccc.charCodeAt(0))<<12|(63&cccc.charCodeAt(1))<<6|63&cccc.charCodeAt(2));default:return fromCharCode((31&cccc.charCodeAt(0))<<6|63&cccc.charCodeAt(1))}};var btou=function(b){return b.replace(re_btou,cb_btou)};var cb_decode=function(cccc){var len=cccc.length,padlen=len%4,n=(len>0?b64tab[cccc.charAt(0)]<<18:0)|(len>1?b64tab[cccc.charAt(1)]<<12:0)|(len>2?b64tab[cccc.charAt(2)]<<6:0)|(len>3?b64tab[cccc.charAt(3)]:0),chars=[fromCharCode(n>>>16),fromCharCode(n>>>8&255),fromCharCode(n&255)];chars.length-=[0,0,2,1][padlen];return chars.join("")};var atob=global.atob?function(a){return global.atob(a)}:function(a){return a.replace(/[\s\S]{1,4}/g,cb_decode)};var _decode=buffer?function(a){return(a.constructor===buffer.constructor?a:new buffer(a,"base64")).toString()}:function(a){return btou(atob(a))};var decode=function(a){return _decode(String(a).replace(/[-_]/g,function(m0){return m0=="-"?"+":"/"}).replace(/[^A-Za-z0-9\+\/]/g,""))};var noConflict=function(){var Base64=global.Base64;global.Base64=_Base64;return Base64};global.Base64={VERSION:version,atob:atob,btoa:btoa,fromBase64:decode,toBase64:encode,utob:utob,encode:encode,encodeURI:encodeURI,btou:btou,decode:decode,noConflict:noConflict};if(typeof Object.defineProperty==="function"){var noEnum=function(v){return{value:v,enumerable:false,writable:true,configurable:true}};global.Base64.extendString=function(){Object.defineProperty(String.prototype,"fromBase64",noEnum(function(){return decode(this)}));Object.defineProperty(String.prototype,"toBase64",noEnum(function(urisafe){return encode(this,urisafe)}));Object.defineProperty(String.prototype,"toBase64URI",noEnum(function(){return encode(this,true)}))}}if(global["Meteor"]){Base64=global.Base64}})(this);
 /**
- * Created by yantianyu on 2016/5/6 0006.
+ * Created by yantianyu on 2014/12/12.
+ */
+;
+var devJudge=(function(){
+    var userAgent = window.navigator.userAgent.toLowerCase();
+    return {
+        isWeixin:function(){
+            return userAgent.indexOf('micromessenger') > 0;
+        },
+        isAndroid:function(){
+            return userAgent.indexOf('android') > 0;
+        },
+        isIOS:function(){
+            return /iphone/i.test(userAgent) || /ipod/i.test(userAgent) || /ipad/i.test(userAgent);
+        },
+        isHjlaoshi:function(){
+            return /Hjlaoshi/i.test(userAgent);
+        }
+    }
+})();
+
+var JSNativeBridge = (function(){
+    var _handler = null;
+    var oriURL = window.location.href;
+    function _send(id, content) {
+        uplusInterface.postWebpageMessage(id, encodeURIComponent(JSON.stringify(!content ? '' : content)));
+    }
+
+    function _receive(msg, msg_content) {
+        _handler(msg, msg_content);
+    }
+
+    function _addHandler(handler) {
+        _handler = handler;
+    }
+
+    return {
+        send: function(id, content) {
+            _send(id, content);
+        },
+
+        receive: function(msg_id, msg_content) {
+            try {
+                _receive(msg_id, JSON.parse(decodeURIComponent(msg_content)));
+            } catch(e) {
+
+            }
+        },
+        postNativeMessage: function() {
+            JSNativeBridge.receive.apply(this, arguments);
+        },
+
+        init: function(handler) {
+            if(!window.uplusInterface) {
+                uplusInterface = {};
+                uplusInterface.postWebpageMessage = function(id, content) {
+                    //window.location.href = oriURL + '#msg_id=' + id + '&msg_content=' + content;
+                    var iframe = document.createElement("iframe");
+                    iframe.src = oriURL + '#msg_id=' + id + '&msg_content=' + content;
+                    iframe.style.display = 'none';
+                    document.body.appendChild(iframe);
+                    iframe.parentNode.removeChild(iframe);
+                    iframe = null;
+                }
+            }
+            if(!devJudge.isHjlaoshi()){
+                uplusInterface.postWebpageMessage = function(id, content){};
+            }
+            _addHandler(handler);
+        }
+    }
+}());
+/**
+ * Created by yantianyu on 2016/5/12 0006.
  */
 ;
 var app = angular.module('app', ['ngRoute', 'ngAnimate', 'templatescache']);
@@ -404,6 +476,7 @@ app.config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'result.html',
             controller: 'resultController'
         })
+
         .otherwise('/home');
 
 }]);
@@ -419,125 +492,30 @@ app.controller('homeController', ['$scope', '$http', '$location', '$rootScope', 
         url: '../../common/spread.json'
     }).then(function (resp) {
         $scope.imgSrc = resp.data.front_pic_2;
-        $scope.openBtnText = resp.data.button_share_name_11;
-        $scope.phoneNumber = '';
-        $scope.openBtnBgImg = resp.data.button_share_pic_10;
-        $scope.rulesText = resp.data.share_rule_12;
-        $rootScope.pageTitle = resp.data.title_1;
+        $scope.shareBtnText = resp.data.button_name_5;
+        $scope.openBtnBgImg = resp.data.button_pic_4;
+        $scope.rulesText = resp.data.rule_6;
 
-        $scope.openRedPackage = function () {
-            // $location.path('result');
-            var user_id = null, domainName = 'http://192.168.0.231';
-
-            function getReqPrm(name) {
-                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-                var r = window.location.search.substr(1).match(reg);
-                if (r != null) {
-                    return unescape(r[2]);
-                } else {
-                    return null;
-                }
-            }
-
-            try {
-                user_id = getReqPrm('parameter') ? JSON.parse(decodeURIComponent(getReqPrm('parameter'))).user_id : null;
-            } catch (e) {
-                console.log(e);
-            }
-            if (user_id === null) {
-                user_id = '15800031138';
-            } else {
-                user_id = user_id.split('@')[0];
-            }
-
-            if (/test\.|testftp\./.test(location.href)) {
-                domainName = 'http://test.hjlaoshi.com';
-            } else if (/\.233|\.231/.test(location.href)) {
-                domainName = 'http://192.168.0.231';
-            } else if (/guanli\.|ftp\./.test(location.href)) {
-                domainName = 'http://guanli.hjlaoshi.com';
-            }
-
-            console.log('domainName:' + domainName + '\nuser_id:' + user_id);
-
-            $http({
-                method: 'JSONP',
-                url: resp.data.jsonPURL + "?id=" + resp.data.id + "&phone=" + $scope.phoneNumber + '&callback=JSON_CALLBACK'
-            }).then(function (data) {
-                console.log(data.data);
-                if (data.data.status == '7' || data.data.status == '1') {
-                    storageService.data = {
-                        "price": data.data.price,
-                        "phoneNumber": $scope.phoneNumber
-                    };
-                    $location.path('result');
-                } else {
-                    $rootScope.alertText = data.data.msg;
-                    $rootScope.alertMode = 'hover';
-                    $timeout(function () {
-                        $rootScope.alertMode = '';
-                    }, 5000);
-                }
-            }, function (error) {
-                $rootScope.alertText = "网络断开";
-                $rootScope.alertMode = 'hover';
-                $timeout(function () {
-                    $rootScope.alertMode = '';
-                }, 5000);
+        $scope.share = function () {
+            JSNativeBridge.send('share', {
+                "content": resp.data.share_word_8[Math.floor(Math.random() * 3)],
+                "title": resp.data.share_title_7[Math.floor(Math.random() * 3)],
+                "type": 0,
+                "image_url": resp.data.share_pic_9,
+                "target_url": resp.data.shareURL,
+                "target_url_forQQ": resp.data.shareURL_forQQ
             });
         };
-
-        $http({
-            method: 'JSONP',
-            url: "http://test.hjlaoshi.com" + '/nb_static/get_js_sdk_config?url=' + Base64.encode(location.href.split('#')[0]) + '&callback=JSON_CALLBACK'
-        }).then(function (data) {
-            var configObj = data.data;
-            configObj.jsApiList = ['hideOptionMenu', 'onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareWeibo', 'onMenuShareQZone'];
-            configObj.debug = false;
-            wx.config(configObj);
-            wx.ready(function () {
-                var shareCFObj = {
-                    title: resp.data.share_title_7[Math.floor(Math.random() * 3)] || resp.data.share_title_7[0], // 分享标题
-                    desc: resp.data.share_word_8[Math.floor(Math.random() * 3)] || resp.data.share_word_8[0], // 分享描述
-                    link: resp.data.shareURL, // 分享链接
-                    imgUrl: resp.data.share_pic_9, // 分享图标
-                    type: '', // 分享类型,music、video或link，不填默认为link
-                    dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-                    success: function () {
-                        // 用户确认分享后执行的回调函数
-                    },
-                    cancel: function () {
-                        // 用户取消分享后执行的回调函数
-                    }
-                };
-                // wx.hideOptionMenu();
-                wx.onMenuShareTimeline(shareCFObj);
-                wx.onMenuShareAppMessage(shareCFObj);
-                wx.onMenuShareQQ(shareCFObj);
-                wx.onMenuShareWeibo(shareCFObj);
-                wx.onMenuShareQZone({
-                    title: resp.data.share_title_7[Math.floor(Math.random() * 3)] || resp.data.share_title_7[0], // 分享标题
-                    desc: resp.data.share_word_8[Math.floor(Math.random() * 3)] || resp.data.share_word_8[0], // 分享描述
-                    link: resp.data.shareURL, // 分享链接
-                    imgUrl: resp.data.share_pic_9, // 分享图标
-                    success: function () {
-                        // 用户确认分享后执行的回调函数
-                    },
-                    cancel: function () {
-                        // 用户取消分享后执行的回调函数
-                    }
-                });
-            });
-        }, function (error) {
-            console.log(error);
-        });
+    });
+    JSNativeBridge.init(function (id, content) {
+        switch(id){
+            case 'client_msg_already_share':break;
+            default:break;
+        }
     });
 }]);
 
-app.controller('resultController', ['$scope', '$http', '$rootScope', 'storageService', '$location', function ($scope, $http, $rootScope, storageService, $location) {
-    if (storageService.data == []) {
-        $location.path('result');
-    }
+app.controller('resultController', ['$scope', '$http', '$rootScope', 'storageService', function ($scope, $http, $rootScope, storageService) {
     $http({
         method: 'GET',
         url: '../../common/spread.json'
@@ -552,3 +530,6 @@ app.controller('resultController', ['$scope', '$http', '$rootScope', 'storageSer
         window.location = 'http://www.hjlaoshi.com';
     };
 }]);
+
+app.run(function () {
+});

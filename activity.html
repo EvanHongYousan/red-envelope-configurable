@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <title></title>
+</head>
+<body>
+<!--  http://ftp.ztmomo.com/rtc/spread/activity.html  -->
+</body>
+<script>
+//window.location="./566175140cf295b050f4f876/client/index.html";
+
+var userAgent = window.navigator.userAgent.toLowerCase();
+
+function getReqPrm(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) {
+        return unescape(r[2]);
+    }else{
+        return null;
+    }
+}
+
+if(/HjlaoshiAndroid/i.test(userAgent) && (parseFloat(userAgent.match(/[0-9]\.[0-9]\.[0-9]\.[0-9]/g).pop()) > 1.4)){
+	window.location="./pre_red/client/html/index.html" + '?parameter=' + getReqPrm('parameter');
+}
+else if(/HjlaoshiiOS/i.test(userAgent) && (parseFloat(userAgent.match(/[0-9]\.[0-9]\.[0-9]\.[0-9]/g).pop()) > 1.4)){
+	window.location="./pre_red/client/html/index.html" + '?parameter=' + getReqPrm('parameter');
+}
+else{
+	window.location="./activityover/activity_over.html";
+}
+
+</script>
+</html>

@@ -26,7 +26,7 @@ app.service('storageService', function () {
 app.controller('homeController', ['$scope', '$http', '$location', '$rootScope', '$timeout', 'storageService', function ($scope, $http, $location, $rootScope, $timeout, storageService) {
     $http({
         method: 'GET',
-        url: '../common/spread.json'
+        url: '../../common/spread.json'
     }).then(function (resp) {
         $scope.imgSrc = resp.data.front_pic_2;
         $scope.shareBtnText = resp.data.button_name_5;
@@ -55,7 +55,7 @@ app.controller('homeController', ['$scope', '$http', '$location', '$rootScope', 
 app.controller('resultController', ['$scope', '$http', '$rootScope', 'storageService', function ($scope, $http, $rootScope, storageService) {
     $http({
         method: 'GET',
-        url: '../common/spread.json'
+        url: '../../common/spread.json'
     }).then(function (resp) {
         $scope.imgSrc = resp.data.front_pic_2;
         $scope.downloadBtnText = resp.data.button_fetch_text_14;
