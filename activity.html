@@ -26,10 +26,10 @@ function getReqPrm(name) {
 }
 
 if(/HjlaoshiAndroid/i.test(userAgent) && (parseFloat(userAgent.match(/[0-9]\.[0-9]\.[0-9]\.[0-9]/g).pop()) > 1.4)){
-	window.location="./pre_red/client/html/index.html" + '?parameter=' + getReqPrm('parameter');
+	window.location="./red/client/html/index.html" + '?parameter=' + getReqPrm('parameter');
 }
 else if(/HjlaoshiiOS/i.test(userAgent) && (parseFloat(userAgent.match(/[0-9]\.[0-9]\.[0-9]\.[0-9]/g).pop()) > 1.4)){
-	window.location="./pre_red/client/html/index.html" + '?parameter=' + getReqPrm('parameter');
+	window.location="./red/client/html/index.html" + '?parameter=' + getReqPrm('parameter');
 }
 else{
 	window.location="./activityover/activity_over.html";
