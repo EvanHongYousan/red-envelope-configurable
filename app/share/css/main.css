@@ -63,13 +63,13 @@ body {
   padding: 0;
   margin: 0;
   border: none;
-  width: 100%;
-  overflow: hidden; }
+  width: 100%; }
   .home .imgContainer img {
     padding: 0;
     margin: 0;
     border: none;
-    width: 100%; }
+    width: 100%;
+    display: block; }
 
 .home .bottomContainer {
   text-align: center; }
@@ -82,27 +82,43 @@ body {
     color: white;
     background-color: #ff8e42;
     border-radius: 5px;
-    font-size: 22px; }
+    font-size: 20px; }
   .home .bottomContainer input {
     width: 80%;
     padding: 10px;
     border: none;
     border-radius: 5px;
     background-color: #e5e5e5;
-    color: white;
+    color: #959595;
     text-align: center;
-    font-size: 22px;
+    font-size: 20px;
     margin: 20px 0; }
-  .home .bottomContainer input[placeholder] {
+  .home .bottomContainer input::-webkit-input-placeholder {
+    color: white; }
+  .home .bottomContainer input:-ms-input-placeholder {
+    color: white; }
+  .home .bottomContainer ::-moz-placeholder {
+    color: white; }
+  .home .bottomContainer :-moz-placeholder {
     color: white; }
   .home .bottomContainer h3 {
     margin-top: 20px;
     margin-bottom: 20px;
     color: #959595; }
+  .home .bottomContainer .rules-title {
+    width: 100%;
+    margin: 36px 0 20px 0;
+    display: block; }
   .home .bottomContainer .rules-text {
     text-align: left;
     color: #959595;
-    padding: 0 7%; }
+    padding: 0 7%;
+    font-size: 14px; }
+  .home .bottomContainer .footer-text {
+    color: #c8c8c8;
+    font-size: 12px;
+    margin-top: 40px;
+    margin-bottom: 20px; }
 
 .result .imgContainer {
   padding: 0;
@@ -122,17 +138,13 @@ body {
     margin-top: 20px;
     color: #959595; }
   .result .bottomContainer .certificate {
-    width: 238px;
-    height: 100px;
+    width: 285px;
+    height: 120px;
     background: url(../../common/images/certificate.png) no-repeat;
     background-size: 100% 100%;
-    margin: 20px auto;
-    -webkit-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.25);
-    -moz-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.25);
-    -o-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.25);
-    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.25); }
+    margin: 20px auto; }
     .result .bottomContainer .certificate span {
-      line-height: 100px;
+      line-height: 110px;
       color: #ff8e42;
       font-size: 50px;
       font-weight: bolder; }
@@ -140,17 +152,22 @@ body {
     width: 80%;
     padding: 10px;
     display: block;
-    margin: 20px auto;
+    margin: 20px auto 22px auto;
     text-align: center;
     color: white;
     background-color: #ff8e42;
     border-radius: 5px;
-    font-size: 22px; }
+    font-size: 20px; }
   .result .bottomContainer .footerText {
     font-size: 12px;
     color: #959595; }
     .result .bottomContainer .footerText .phoneNumber {
       color: #ff8e42; }
+  .result .bottomContainer .footer-text {
+    color: #c8c8c8;
+    font-size: 12px;
+    margin-top: 40px;
+    margin-bottom: 20px; }
 
 .slideup {
   position: absolute;

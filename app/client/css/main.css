@@ -63,13 +63,13 @@ body {
   padding: 0;
   margin: 0;
   border: none;
-  width: 100%;
-  overflow: hidden; }
+  width: 100%; }
   .home .imgContainer img {
     padding: 0;
     margin: 0;
     border: none;
-    width: 100%; }
+    width: 100%;
+    display: block; }
 
 .home .bottomContainer {
   text-align: center; }
@@ -101,10 +101,15 @@ body {
     margin-top: 20px;
     margin-bottom: 20px;
     color: #959595; }
+  .home .bottomContainer .rules-title {
+    width: 100%;
+    margin: 36px 0 20px 0;
+    display: block; }
   .home .bottomContainer .rules-text {
     text-align: left;
     color: #959595;
-    padding: 0 7%; }
+    padding: 0 7%;
+    font-size: 14px; }
   .home .bottomContainer .slogan {
     color: #959595;
     margin-top: 20px;
@@ -112,7 +117,8 @@ body {
   .home .bottomContainer .footer-text {
     color: #c8c8c8;
     font-size: 12px;
-    margin-top: 20px; }
+    margin-top: 40px;
+    margin-bottom: 20px; }
 
 .result .imgContainer {
   padding: 0;

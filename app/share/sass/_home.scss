@@ -4,12 +4,12 @@
     margin: 0;
     border: none;
     width: 100%;
-    overflow: hidden;
     img {
       padding: 0;
       margin: 0;
       border: none;
       width: 100%;
+      display: block;
     }
   }
 
@@ -24,7 +24,7 @@
       color: white;
       background-color: #ff8e42;
       border-radius: 5px;
-      font-size: 22px;
+      font-size: 20px;
     }
     input {
       width: 80%;
@@ -32,12 +32,21 @@
       border: none;
       border-radius: 5px;
       background-color: #e5e5e5;
-      color: white;
+      color: #959595;
       text-align: center;
-      font-size: 22px;
+      font-size: 20px;
       margin: 20px 0;
     }
-    input[placeholder] {
+    input::-webkit-input-placeholder {
+      color: white;
+    }
+    input:-ms-input-placeholder {
+      color: white;
+    }
+    ::-moz-placeholder {
+      color: white;
+    }
+    :-moz-placeholder {
       color: white;
     }
     h3 {
@@ -45,10 +54,22 @@
       margin-bottom: 20px;
       color: #959595;
     }
+    .rules-title {
+      width: 100%;
+      margin: 36px 0 20px 0;
+      display: block;
+    }
     .rules-text {
       text-align: left;
       color: #959595;
       padding: 0 7%;
+      font-size: 14px;
+    }
+    .footer-text {
+      color: #c8c8c8;
+      font-size: 12px;
+      margin-top: 40px;
+      margin-bottom: 20px;
     }
   }
 }

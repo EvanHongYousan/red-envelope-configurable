@@ -5,7 +5,8 @@
     <div class="bottomContainer">
         <input type="text" ng-model="phoneNumber" placeholder="请输入你的手机号码" />
         <span class="openBtn" ng-style="{'background-image': 'url('+openBtnBgImg+')','background-size':'100% 100%'}" ng-click="openRedPackage()">{{openBtnText}}</span>
-        <h3>活动规则</h3>
+        <img class="rules-title" src="../../common/images/rulesTitle.png" alt="">
         <p class="rules-text" ng-repeat="item in rulesText track by $index">{{item}}</p>
+        <p class="footer-text">WWW.HJLAOSHI.COM</p>
     </div>
 </div>
